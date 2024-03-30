@@ -1,6 +1,6 @@
 {
   "name": "dl-cli",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "> TODO: description",
   "author": "shdulu <17625329975@163.com>",
   "homepage": "https://github.com/shdulu/vuecli_study#readme",
@@ -32,6 +32,7 @@
   "dependencies": {
     "chalk": "4",
     "commander": "7",
+    "dl-cli-shared-utils": "^1.0.0",
     "ejs": "3",
     "execa": "5",
     "fs-extra": "10",
@@ -39,7 +40,6 @@
     "inquirer": "8",
     "isbinaryfile": "4",
     "lodash.clonedeep": "^4.5.0",
-    "ora": "5",
-    "dl-cli-shared-utils": "0.0.0"
+    "ora": "5"
   }
 }
