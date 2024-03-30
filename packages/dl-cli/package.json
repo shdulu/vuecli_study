@@ -41,5 +41,6 @@
     "isbinaryfile": "4",
     "lodash.clonedeep": "^4.5.0",
     "ora": "5"
-  }
+  },
+  "gitHead": "bbba841db00837846f90a7ac5a6af106c15dd54e"
 }
