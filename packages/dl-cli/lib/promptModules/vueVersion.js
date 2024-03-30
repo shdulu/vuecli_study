@@ -28,6 +28,8 @@ module.exports = (cli) => {
 
   // 选完提示框的回调
   cli.onPromptComplete((answers, options) => {
+    // 如果是手动配置的话，默认是没有插件的
+    // 手动选择的插件都是在不同的 promptModules 里通过 用户回答调用onPromptComplete添加进去的
     if (answers.vueVersion) {
       options.vueVersion = answers.vueVersion;
     }
