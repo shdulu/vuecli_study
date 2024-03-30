@@ -1,0 +1,14 @@
+{
+  "name": "vuecli_study",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "create": "node packages/dl-cli/bin/vue.js create hello1"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}

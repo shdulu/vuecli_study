@@ -1,0 +1,45 @@
+{
+  "name": "dl-cli",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "shdulu <17625329975@163.com>",
+  "homepage": "https://github.com/shdulu/vuecli_study#readme",
+  "license": "ISC",
+  "main": "bin/vue.js",
+  "bin": {
+    "dl": "bin/vue.js"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmmirror.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shdulu/vuecli_study.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/shdulu/vuecli_study/issues"
+  },
+  "dependencies": {
+    "chalk": "4",
+    "commander": "7",
+    "ejs": "3",
+    "execa": "5",
+    "fs-extra": "10",
+    "globby": "11",
+    "inquirer": "8",
+    "isbinaryfile": "4",
+    "lodash.clonedeep": "^4.5.0",
+    "ora": "5",
+    "dl-cli-shared-utils": "0.0.0"
+  }
+}
