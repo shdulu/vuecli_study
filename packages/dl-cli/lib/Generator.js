@@ -1,3 +1,4 @@
+const GeneratorAPI = require("./GeneratorAPI");
 const { isPlugin } = require("dl-cli-shared-utils");
 class Generator {
   /**
@@ -28,10 +29,13 @@ class Generator {
     console.log("开始真正生成文件和配置了");
     await this.initPlugins(); // 初始化插件
   }
-  initPlugins() {
+  async initPlugins() {
     let { rootOptions } = this;
     for (const plugin of this.plugins) {
-      const {id, apply, options } = plugin
+      const { id, apply, options } = plugin;
+      // 为每个插件创建一个 GeneratorAPI 对象
+      const api = new GeneratorAPI(id, options, rootOptions);
+      await apply(api, options, rootOptions);
     }
   }
 }

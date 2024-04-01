@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
-const { chalk, execa } = require("dl-cli-shared-utils");
+const { chalk, execa, loadModule } = require("dl-cli-shared-utils");
 const cloneDeep = require("lodash.clonedeep");
-const Generator = require('./Generator')
+const Generator = require("./Generator");
 const { defaults } = require("./options");
 const writeFileTree = require("./utils/writeFileTree");
 const PromptModuleAPI = require("./PromptModuleAPI");
@@ -82,6 +82,7 @@ class Creator {
     // ['@vue/cli-service', '@vue/cli-plugin-eslint']
     const plugins = [];
     for (const id of Object.keys(rawPlugins)) {
+      // 加载context目录下的文件
       const apply = loadModule(`${id}/generator`, this.context);
       let options = rawPlugins[id];
       // id:@vue/cli-service, apply:插件的generator函数, options:插件选项
