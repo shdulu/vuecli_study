@@ -22,9 +22,18 @@ class Generator {
     const cliService = plugins.find((p) => p.id === "@vue/cli-service");
 
     // cliService的配置对象就是preset，也就是根配置
-    this.rootOptions - cliService.options;
+    this.rootOptions = cliService.options;
   }
-  async generate() {}
+  async generate() {
+    console.log("开始真正生成文件和配置了");
+    await this.initPlugins(); // 初始化插件
+  }
+  initPlugins() {
+    let { rootOptions } = this;
+    for (const plugin of this.plugins) {
+      const {id, apply, options } = plugin
+    }
+  }
 }
 
 module.exports = Generator;
