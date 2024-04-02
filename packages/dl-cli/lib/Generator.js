@@ -2,6 +2,7 @@ const GeneratorAPI = require("./GeneratorAPI");
 const { isPlugin } = require("dl-cli-shared-utils");
 const normalizeFilePaths = require("./utils/normalizeFilePaths");
 const writeFileTree = require("./utils/writeFileTree");
+const ejs = require("ejs");
 class Generator {
   /**
    * Creates an instance of Generator.
@@ -9,7 +10,7 @@ class Generator {
    * @param {*} {pkg, plugins}
    * @memberof Generator
    */
-  constructor(context, { pkg, plugins }) {
+  constructor(context, { pkg = {}, plugins = [] }) {
     this.context = context;
     this.plugins = plugins;
     // 生成器会把所有要生成的文件和文件内容放在files对象
@@ -22,10 +23,10 @@ class Generator {
     this.allPluginIds = Object.keys(this.pkg.dependencies || {})
       .concat(this.pkg.devDependencies || {})
       .filter(isPlugin);
-    const cliService = plugins.find((p) => p.id === "@vue/cli-service");
+    const cliService = this.plugins.find((p) => p.id === "@vue/cli-service");
 
     // cliService的配置对象就是preset，也就是根配置
-    this.rootOptions = cliService.options;
+    this.rootOptions = cliService ? cliService.options : {};
   }
   async generate() {
     console.log("开始真正生成文件和配置了");
@@ -41,10 +42,15 @@ class Generator {
   sortPkg() {
     console.log("对依赖包排序");
   }
+  hasPlugin(_id) {
+    return [...this.plugins.map((p) => p.id, ...this.allPluginIds)].some(
+      (id) => id === _id
+    );
+  }
   // 真正执行中间件
   async resolveFiles() {
     for (const middleware of this.fileMiddlewares) {
-      await middleware(this.files, ejs.render());
+      await middleware(this.files, ejs.render);
     }
     normalizeFilePaths(this.files);
   }
@@ -56,7 +62,7 @@ class Generator {
     for (const plugin of this.plugins) {
       const { id, apply, options } = plugin;
       // 为每个插件创建一个 GeneratorAPI 对象
-      const api = new GeneratorAPI(id, options, rootOptions);
+      const api = new GeneratorAPI(id, this, options, rootOptions);
       // 调用插件的apply方法
       await apply(api, options, rootOptions);
     }

@@ -39,7 +39,7 @@ class GeneratorAPI {
     if (isString(source)) {
       source = path.resolve(baseDir, source);
       // 此处只是暂存中间件函数，并没有执行
-      this._injectFileMiddleware(async function (files) {
+      this._injectFileMiddleware(async (files) => {
         const data = this._resolveData(additionData);
         let globby = require("globby");
         let _files = await globby(["**/*"], { cwd: source });
@@ -78,6 +78,9 @@ class GeneratorAPI {
         pkg[key] = value;
       }
     }
+  }
+  hasPlugin(id) {
+    return this.generator.hasPlugin(id);
   }
   _resolveData(additionData) {
     return Object.assign(

@@ -88,6 +88,7 @@ class Creator {
       // id:@vue/cli-service, apply:插件的generator函数, options:插件选项
       plugins.push({ id, apply, options });
     }
+    return plugins;
   }
   resolvePreset(name) {
     return this.getPresets()[name];
