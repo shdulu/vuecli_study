@@ -36,6 +36,7 @@
     "ejs": "3",
     "execa": "5",
     "fs-extra": "10",
+    "slash": "^3.0.0",
     "globby": "11",
     "inquirer": "8",
     "isbinaryfile": "4",
