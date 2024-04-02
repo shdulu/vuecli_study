@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const ejs = require("ejs");
-const { isBinaryFile } = require("isbinaryfile");
+const { isBinaryFileSync } = require("isbinaryfile");
 
 const { toShortPluginId } = require("dl-cli-shared-utils");
 const mergeDeps = require("./utils/mergeDeps");
@@ -108,8 +108,8 @@ function extractCallDir() {
 }
 
 function renderFile(name, data) {
-  if (isBinaryFile(name)) {
-    // 二进制文件】
+  if (isBinaryFileSync(name)) {
+    // 二进制文件直接返回
     return fs.readFileSync(name);
   }
   let template = fs.readdirSync(name, "utf8");
